@@ -43,9 +43,6 @@ const int kMaxAmbigStringSize = UNICHAR_LEN * (MAX_AMBIG_SIZE + 1);
 AmbigSpec::AmbigSpec() {
   wrong_ngram[0] = INVALID_UNICHAR_ID;
   correct_fragments[0] = INVALID_UNICHAR_ID;
-  correct_ngram_id = INVALID_UNICHAR_ID;
-  type = NOT_AMBIG;
-  wrong_ngram_size = 0;
 }
 
 ELISTIZE(AmbigSpec)

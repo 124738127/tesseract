@@ -121,9 +121,9 @@ class AmbigSpec : public ELIST_LINK {
 
   UNICHAR_ID wrong_ngram[MAX_AMBIG_SIZE + 1];
   UNICHAR_ID correct_fragments[MAX_AMBIG_SIZE + 1];
-  UNICHAR_ID correct_ngram_id;
-  AmbigType type;
-  int wrong_ngram_size;
+  UNICHAR_ID correct_ngram_id = INVALID_UNICHAR_ID;
+  AmbigType type = NOT_AMBIG;
+  int wrong_ngram_size = 0;
 };
 ELISTIZEH(AmbigSpec)
 
