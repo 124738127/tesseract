@@ -337,18 +337,17 @@ bool SquishedDawg::read_squished_dawg(TFile *file) {
 
 std::unique_ptr<EDGE_REF[]> SquishedDawg::build_node_map(
     int32_t *num_nodes) const {
-  EDGE_REF   edge;
   std::unique_ptr<EDGE_REF[]> node_map(new EDGE_REF[num_edges_]);
   int32_t    node_counter;
   int32_t    num_edges;
 
-  for (edge = 0; edge < num_edges_; edge++)       // init all slots
+  for (EDGE_REF edge = 0; edge < num_edges_; ++edge) // init all slots
     node_map[edge] = -1;
 
   node_counter = num_forward_edges(0);
 
   *num_nodes   = 0;
-  for (edge = 0; edge < num_edges_; edge++) {     // search all slots
+  for (EDGE_REF edge = 0; edge < num_edges_; ++edge) { // search all slots
 
     if (forward_edge(edge)) {
       (*num_nodes)++;                          // count nodes links
@@ -358,14 +357,13 @@ std::unique_ptr<EDGE_REF[]> SquishedDawg::build_node_map(
       edge += num_edges;
       if (edge >= num_edges_) break;
       if (backward_edge(edge)) while (!last_edge(edge++));
-      edge--;
+      --edge;
     }
   }
   return node_map;
 }
 
 bool SquishedDawg::write_squished_dawg(TFile *file) {
-  EDGE_REF    edge;
   int32_t     num_edges;
   int32_t     node_count = 0;
   EDGE_REF    old_index;
@@ -382,7 +380,7 @@ bool SquishedDawg::write_squished_dawg(TFile *file) {
 
   // Count the number of edges in this Dawg.
   num_edges = 0;
-  for (edge=0; edge < num_edges_; edge++)
+  for (EDGE_REF edge = 0; edge < num_edges_; ++edge)
     if (forward_edge(edge))
       num_edges++;
 
@@ -394,7 +392,7 @@ bool SquishedDawg::write_squished_dawg(TFile *file) {
     tprintf("%d edges in DAWG\n", num_edges);
   }
 
-  for (edge = 0; edge < num_edges_; edge++) {
+  for (EDGE_REF edge = 0; edge < num_edges_; ++edge) {
     if (forward_edge(edge)) {  // write forward edges
       do {
         old_index = next_node_from_edge_rec(edges_[edge]);
@@ -408,7 +406,7 @@ bool SquishedDawg::write_squished_dawg(TFile *file) {
       if (backward_edge(edge))  // skip back links
         while (!last_edge(edge++));
 
-      edge--;
+      --edge;
     }
   }
   return true;
