@@ -2,7 +2,6 @@
  * File:        ocrrow.h  (Formerly row.h)
  * Description: Code for the ROW class.
  * Author:      Ray Smith
- * Created:     Tue Oct 08 15:58:04 BST 1991
  *
  * (C) Copyright 1991, Hewlett-Packard Ltd.
  ** Licensed under the Apache License, Version 2.0 (the "License");
@@ -159,12 +158,12 @@ class ROW:public ELIST_LINK
     QSPLINE baseline;            //baseline spline
 
     // These get set after blocks have been determined.
-    bool has_drop_cap_;
-    int16_t lmargin_;   // Distance to left polyblock margin.
-    int16_t rmargin_;   // Distance to right polyblock margin.
+    bool has_drop_cap_ = false;
+    int16_t lmargin_ = 0;        // Distance to left polyblock margin.
+    int16_t rmargin_ = 0;        // Distance to right polyblock margin.
 
     // This gets set during paragraph analysis.
-    PARA *para_;      // Paragraph of which this row is part.
+    PARA* para_ = nullptr;       // Paragraph of which this row is part.
 };
 
 ELISTIZEH (ROW)

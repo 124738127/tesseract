@@ -40,18 +40,14 @@ float ascenders,                 //ascender size
 float descenders,                //descender drop
 int16_t kern,                      //char gap
 int16_t space                      //word gap
-)
-    : baseline(spline_size, xstarts, coeffs),
-      para_(nullptr) {
-  kerning = kern;                //just store stuff
-  spacing = space;
-  xheight = x_height;
-  ascrise = ascenders;
-  bodysize = 0.0f;
-  descdrop = descenders;
-  has_drop_cap_ = false;
-  lmargin_ = 0;
-  rmargin_ = 0;
+) :   kerning(kern),
+      spacing(space),
+      xheight(x_height),
+      ascrise(ascenders),
+      descdrop(descenders),
+      bodysize(0.0f),
+      baseline(spline_size, xstarts, coeffs)
+{
 }
 
 
@@ -66,17 +62,14 @@ ROW::ROW(                 //constructor
          TO_ROW *to_row,  //source row
          int16_t kern,      //char gap
          int16_t space      //word gap
-        ) : para_(nullptr) {
-  kerning = kern;                //just store stuff
-  spacing = space;
-  xheight = to_row->xheight;
-  bodysize = to_row->body_size;
-  ascrise = to_row->ascrise;
-  descdrop = to_row->descdrop;
-  baseline = to_row->baseline;
-  has_drop_cap_ = false;
-  lmargin_ = 0;
-  rmargin_ = 0;
+        ) : kerning(kern),
+            spacing(space),
+            xheight(to_row->xheight),
+            ascrise(to_row->ascrise),
+            descdrop(to_row->descdrop),
+            bodysize(to_row->body_size),
+            baseline(to_row->baseline)
+{
 }
 
 // Returns the bounding box including the desired combination of upper and
