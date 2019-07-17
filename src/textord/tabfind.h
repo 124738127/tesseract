@@ -373,7 +373,7 @@ class TabFind : public AlignedBlob {
   // List of commonly occurring width ranges with x=min and y=max.
   ICOORDELT_LIST column_widths_;  ///< List of commonly occurring width ranges.
   /** Callback to test an int for being a common width. */
-  WidthCallback width_cb_;
+  WidthCallback width_cb_ = nullptr;
   // Sets of bounding boxes that are candidate tab stops.
   GenericVector<BLOBNBOX*> left_tab_boxes_;
   GenericVector<BLOBNBOX*> right_tab_boxes_;
